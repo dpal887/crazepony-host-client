@@ -14,6 +14,7 @@ using AxlesView.Properties;
 using OpenTK;
 using OpenTK.Graphics;
 
+
 namespace AxlesView
 {
     public enum DataMode { Text, Hex,ShowHex}
@@ -94,9 +95,9 @@ namespace AxlesView
             comport.DiscardOutBuffer();
                 
             // Show the hex digits on in the terminal window
-            Log(LogMsgType.Outgoing, "【发送】读取PID参数...\n");
+            Log(LogMsgType.Outgoing, "[Send] reads PID parameters ...\n");
         }
-        else Log(LogMsgType.Outgoing, "【错误】请先连接串口！\n");
+        else Log(LogMsgType.Outgoing, "[Error], please connect serial!\n");
     }
 
     /// <summary> Send the user's data currently entered in the 'send' box.</summary>
@@ -108,7 +109,7 @@ namespace AxlesView
         comport.Write(txtSendData.Text);
 
         // Show in the terminal window the user's text
-        Log(LogMsgType.Outgoing, "【发送】传送数据:" + txtSendData.Text + "\n");
+        Log(LogMsgType.Outgoing, "[Send] to transmit data:" + txtSendData.Text + "\n");
       }
       else
       {
@@ -121,7 +122,7 @@ namespace AxlesView
           comport.Write(data, 0, data.Length);
 
           // Show the hex digits on in the terminal window
-          Log(LogMsgType.Outgoing, "【发送】传送数据:"+ByteArrayToHexString(data) + "\n");
+          Log(LogMsgType.Outgoing, "[Send] to transmit data:" + ByteArrayToHexString(data) + "\n");
         }
         catch (FormatException)
         {
@@ -432,7 +433,7 @@ namespace AxlesView
       // If the user presses [ENTER], send the data now
       if (KeyHandled = e.KeyCode == Keys.Enter) { e.Handled = true; SendData(); } 
     }
-    private void txtSendData_KeyPress(object sender, KeyPressEventArgs e)
+    private void txtSendData_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
     { 
         e.Handled = KeyHandled; 
     }
@@ -494,10 +495,10 @@ namespace AxlesView
                 comport.Write(data, 0, 32);
                 comport.DiscardOutBuffer();
                // Show the hex digits on in the terminal window
-                Log(LogMsgType.Outgoing, "【遥控】油门控制当前值为:"+throttle.Value*10+"\n");
+                Log(LogMsgType.Outgoing, "[Remote] throttle control current value:" + throttle.Value*10+"\n");
               
            }
-           else Log(LogMsgType.Outgoing, "【错误】请先连接串口！\n");
+           else Log(LogMsgType.Outgoing, "[Error], please connect serial!\n");
         }
 
         private void cmbBaudRate_SelectedIndexChanged(object sender, EventArgs e)
