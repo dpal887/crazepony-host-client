@@ -1,11 +1,11 @@
-## 说明
+Explanation
 
-* 使用C#语言编写，编译环境visual studio 2008以上
-* 姿态部分使用opentk库 
-* 使用前请保证四轴源码和上位机配套
-* 将四轴通过usb线连接，打开串口即可，模式要选择为姿态显示
-* 姿态显示模式是上位机功能
-* 16进制显示就是16进制的串口助手
-* 文本显示也是串口助手（可能中文支持差一些）
-* 简单姿态显示功能，默认YAW角输出显示关闭，需要请解注释
-* 油门状态设置和显示。
+Use C # language, compiler environment than visual studio 2008
+Attitude partially used opentk library
+Before use, ensure the source and the host computer supporting axis
+The axis connected via usb cable, you can open the serial port, the display mode to be selected as a gesture
+Attitude is a PC display mode function
+Hexadecimal display is hexadecimal serial assistant
+Text display is serial assistant (Chinese support may be worse)
+Simple gestures display, default YAW angle output display off, you need to ask solution Notes
+Throttle settings and status display.
