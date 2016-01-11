@@ -61,6 +61,7 @@ namespace AxlesView
             
             cmbDataBits.Text = "8";
             foreach (string s in SerialPort.GetPortNames())
+                //I had to remove the last character. For some reason the encoding added a tang to the end of each serial which caused an error.
                 cmbPortName.Items.Add(s.Remove(s.Length-1));
 
             if (cmbPortName.Items.Contains(Settings.Default.PortName))
