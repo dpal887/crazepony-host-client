@@ -61,7 +61,7 @@ namespace AxlesView
             
             cmbDataBits.Text = "8";
             foreach (string s in SerialPort.GetPortNames())
-                cmbPortName.Items.Add(s);
+                cmbPortName.Items.Add(s.Remove(s.Length-1));
 
             if (cmbPortName.Items.Contains(Settings.Default.PortName))
                 cmbPortName.Text = Settings.Default.PortName;
@@ -377,11 +377,11 @@ namespace AxlesView
                       sum += buffer[j];
 
                   }
-                  //检查校验和正确
-                  if (sum == buffer[i + 17] && sum != 0)
+                        //Check the correct checksum
+                        if (sum == buffer[i + 17] && sum != 0)
                   {
-                      //减500的原因是在飞机里数据加了500把负数转换成正数
-                      temp = ((buffer[i + 3] << 8) + buffer[i + 4]) - 500;
+                            //The reason is in the minus 500 airplane data plus the 500 negative converted into a positive number
+                            temp = ((buffer[i + 3] << 8) + buffer[i + 4]) - 500;
 
                       ShowRow(temp.ToString());
                       Rotate3D_X(temp);
@@ -389,14 +389,14 @@ namespace AxlesView
                       temp = ((buffer[i + 5] << 8) + buffer[i + 6]) - 500;
                       ShowPit(temp.ToString());
                       Rotate3D_Z(-temp);
-                    //没显示YAW轴，需要的话解注释：
-                    //  temp = ((buffer[i + 7] << 8) + buffer[i + 8]) - 180;
-                      //  ShowYaw(temp.ToString());
-                    ///  Rotate3D_Y(-temp);
+                            //It did not show YAW axis, if desired solution Note:
+                            //  temp = ((buffer[i + 7] << 8) + buffer[i + 8]) - 180;
+                            //  ShowYaw(temp.ToString());
+                            ///  Rotate3D_Y(-temp);
 
 
-                      //更新电机状态
-                      SetMotor1((buffer[i + 9] << 8) + buffer[i + 10]);
+                            //Motor status update
+                            SetMotor1((buffer[i + 9] << 8) + buffer[i + 10]);
                       SetMotor2((buffer[i + 11] << 8) + buffer[i + 12]);
                       SetMotor3((buffer[i + 13] << 8) + buffer[i + 14]);
                       SetMotor4((buffer[i + 15] << 8) + buffer[i + 16]);
@@ -455,7 +455,7 @@ namespace AxlesView
                 // Set the port's settings
                 comport.BaudRate = int.Parse(cmbBaudRate.Text);
                 comport.DataBits = int.Parse(cmbDataBits.Text);
-                //不设置停止位了，用不上      comport.StopBits = (StopBits)Enum.Parse(typeof(StopBits), cmbStopBits.Text);
+                //Stop bit is not set, and no access      comport.StopBits = (StopBits)Enum.Parse(typeof(StopBits), cmbStopBits.Text);
                 comport.Parity = (Parity)Enum.Parse(typeof(Parity), cmbParity.Text);
                 comport.PortName = cmbPortName.Text;
 
